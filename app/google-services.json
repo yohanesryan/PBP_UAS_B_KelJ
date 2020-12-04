@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1007769880854",
+    "project_id": "rentalmotor-8b3dd",
+    "storage_bucket": "rentalmotor-8b3dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007769880854:android:b004d1d40a8f6c13a5a837",
+        "android_client_info": {
+          "package_name": "com.uaspbp.rentalmotor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007769880854-271tk4t3o7rnmtgmrjjp3fo6lr68gk8k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ecQ4uJSV4y8gbzF8-eKW3XkCuze0FMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1007769880854-271tk4t3o7rnmtgmrjjp3fo6lr68gk8k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
