@@ -83,25 +83,32 @@ public class Login extends AppCompatActivity {
         String email = txtEmail.getText().toString().trim();
         String password = txtPassword.getText().toString().trim();
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        if(txtEmail.getText().toString().equalsIgnoreCase("admin123@gmail.com") && txtPassword.getText().toString().equalsIgnoreCase("admin123")) {
+            Toast.makeText(Login.this, "Welcome Admin", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(Login.this, MainActivity.class));
+        }
+            else{
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if (task.isSuccessful()) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                    if (user.isEmailVerified()) {
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        startActivity(intent);
+                        if (user.isEmailVerified()) {
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            user.sendEmailVerification();
+                            Toast.makeText(Login.this, "Please check your email!", Toast.LENGTH_LONG).show();
+                        }
+
                     } else {
-                        user.sendEmailVerification();
-                        Toast.makeText(Login.this, "Please check your email!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Login.this, "Failed to login!", Toast.LENGTH_LONG).show();
                     }
-
-                } else {
-                    Toast.makeText(Login.this, "Failed to login!", Toast.LENGTH_LONG).show();
                 }
+            });
             }
-        });
+
     }
 }
