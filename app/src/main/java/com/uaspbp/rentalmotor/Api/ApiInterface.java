@@ -82,4 +82,9 @@ public interface ApiInterface {
 //
 //    @DELETE("transaksi/{id}")
 //    Call<TransaksiResponse> deleteTransaksi(@Path("id")String id);
+
+    @POST("login")
+    @FormUrlEncoded
+    Call<UserResponse> loginUser(@Field("email") String email,
+                                 @Field("password") String password);
 }

@@ -50,4 +50,7 @@ public class UserDao {
         this.password = password;
     }
 
+    public UserDao get(int i) {
+        return get(i);
+    }
 }
