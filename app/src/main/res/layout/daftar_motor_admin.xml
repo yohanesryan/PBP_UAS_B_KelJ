@@ -29,6 +29,15 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/ic_baseline_arrow_back_24"/>
 
+            <ImageButton
+                android:id="@+id/ibAdd"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@drawable/ic_baseline_add_24"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,15 +88,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <include layout="@layout/shimmer_layout"></include>
-                <include layout="@layout/shimmer_layout"></include>
-                <include layout="@layout/shimmer_layout"></include>
-                <include layout="@layout/shimmer_layout"></include>
-                <include layout="@layout/shimmer_layout"></include>
-                <include layout="@layout/shimmer_layout"></include>
-                <include layout="@layout/shimmer_layout"></include>
-                <include layout="@layout/shimmer_layout"></include>
-                <include layout="@layout/shimmer_layout"></include>
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
 

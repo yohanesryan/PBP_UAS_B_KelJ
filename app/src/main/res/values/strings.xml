@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RentalMotor</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoibXlzdG9nYW5zMTciLCJhIjoiY2tmbnQ4cnZpMXQ2MTJxbWozNzMwMnk4aiJ9.Ol5ex5wZeN3-3kIEZqmC_Q</string>
 </resources>

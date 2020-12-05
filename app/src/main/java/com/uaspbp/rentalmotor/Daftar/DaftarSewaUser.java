@@ -17,6 +17,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.uaspbp.rentalmotor.Adapter.SewaUserRecyclerAdapter;
 import com.uaspbp.rentalmotor.Api.ApiClient;
 import com.uaspbp.rentalmotor.Api.ApiInterface;
+import com.uaspbp.rentalmotor.Create.CreateSewaUser;
 import com.uaspbp.rentalmotor.Dao.TransaksiDao;
 import com.uaspbp.rentalmotor.R;
 import com.uaspbp.rentalmotor.Response.TransaksiResponse;
@@ -30,28 +31,33 @@ import retrofit2.Response;
 
 public class DaftarSewaUser extends AppCompatActivity {
 
-    private ImageButton ibBack;
+    private ImageButton ibBack, ibAdd;
     private RecyclerView recyclerView;
     private SewaUserRecyclerAdapter recyclerAdapter;
     private List<TransaksiDao> transaksi = new ArrayList<>();
     private SearchView searchView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ShimmerFrameLayout shimmerFrameLayout;
-    private String sIdPenyewa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.daftar_sewa_user);
 
-        shimmerFrameLayout = findViewById(R.id.shimmerLayout);
-        shimmerFrameLayout.startShimmer();
-
         ibBack = findViewById(R.id.ibBack);
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        ibAdd = findViewById(R.id.ibAdd);
+        ibAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreateSewaUser.class);
+                startActivity(intent);
             }
         });
 
@@ -62,7 +68,7 @@ public class DaftarSewaUser extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadTransaksiById(sIdPenyewa);
+                loadTransaksi();
             }
         });
 
@@ -79,14 +85,14 @@ public class DaftarSewaUser extends AppCompatActivity {
         }
     }
 
-    private void loadTransaksiById(String id_penyewa) {
+    private void loadTransaksi() {
         ApiInterface apiGetTransaksi = ApiClient.getClient().create(ApiInterface.class);
-        Call<TransaksiResponse> callGetTransaksi = apiGetTransaksi.getTransaksiByIdPenyewa(id_penyewa,"data");
+        Call<TransaksiResponse> callGetTransaksi = apiGetTransaksi.getAllTransaksi("data");
 
         callGetTransaksi.enqueue(new Callback<TransaksiResponse>() {
             @Override
             public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
-                generateDataList((List<TransaksiDao>) response.body().getTransaksis());
+                generateDataList((List<TransaksiDao>) response.body().getTransaksi());
                 swipeRefreshLayout.setRefreshing(false);
             }
 

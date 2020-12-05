@@ -15,9 +15,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.uaspbp.rentalmotor.Adapter.MotorRecyclerAdapterUser;
+import com.uaspbp.rentalmotor.Adapter.SewaUserRecyclerAdapter;
 import com.uaspbp.rentalmotor.Api.ApiClient;
 import com.uaspbp.rentalmotor.Api.ApiInterface;
 import com.uaspbp.rentalmotor.Dao.MotorDao;
+import com.uaspbp.rentalmotor.Dao.TransaksiDao;
 import com.uaspbp.rentalmotor.R;
 import com.uaspbp.rentalmotor.Response.MotorResponse;
 

@@ -9,15 +9,15 @@ import java.util.List;
 public class TransaksiResponse {
     @SerializedName("data")
     @Expose
-    private List<TransaksiDao> transaksis = null;
+    private List<TransaksiDao> transaksi = null;
 
     @SerializedName("message")
     @Expose
     private String message;
 
-    public List<TransaksiDao> getTransaksis() {return transaksis;}
+    public List<TransaksiDao> getTransaksi() {return transaksi;}
 
-    public void setTransaksis(List<TransaksiDao> transaksii) {this.transaksis = transaksii;}
+    public void setTransaksi(List<TransaksiDao> transaksi) {this.transaksi = transaksi;}
 
     public String getMessage() { return message;}
 

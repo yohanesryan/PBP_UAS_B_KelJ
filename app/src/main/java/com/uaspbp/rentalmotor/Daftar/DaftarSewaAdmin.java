@@ -1,5 +1,5 @@
-package com.uaspbp.rentalmotor.Daftar;//
-//
+package com.uaspbp.rentalmotor.Daftar;
+
 //import android.content.Intent;
 //import android.os.Bundle;
 //import android.view.View;
@@ -14,6 +14,11 @@ package com.uaspbp.rentalmotor.Daftar;//
 //import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 //
 //import com.facebook.shimmer.ShimmerFrameLayout;
+//import com.uaspbp.rentalmotor.Api.ApiClient;
+//import com.uaspbp.rentalmotor.Api.ApiInterface;
+//import com.uaspbp.rentalmotor.Dao.TransaksiDao;
+//import com.uaspbp.rentalmotor.R;
+//import com.uaspbp.rentalmotor.Response.TransaksiResponse;
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -80,13 +85,13 @@ package com.uaspbp.rentalmotor.Daftar;//
 //        callGetTransaksi.enqueue(new Callback<TransaksiResponse>() {
 //            @Override
 //            public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
-//                generateDataList(response.body().getTransaksis());
+//                generateDataList(response.body().getTransaksi());
 //                swipeRefreshLayout.setRefreshing(false);
 //            }
 //
 //            @Override
 //            public void onFailure(Call<TransaksiResponse> call, Throwable t) {
-//                Toast.makeText(DaftarReservasiAdmin.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+//                Toast.makeText(DaftarSewaAdmin.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
 //                swipeRefreshLayout.setRefreshing(false);
 //            }
 //        });

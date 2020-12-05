@@ -23,19 +23,25 @@ public interface ApiInterface {
 
     @GET("user/{email}")
     Call<UserResponse> getUserByEmail(@Path("email")String email,
-                                       @Query("data")String data);
+                                      @Query("data")String data);
 
     @POST("registrasi")
     @FormUrlEncoded
     Call<UserResponse> createUser(@Field("name")String nama,
                                   @Field("email")String email,
-                                  @Field("password")String password);
+                                  @Field("password")String password,
+                                  @Field("alamat")String alamat,
+                                  @Field("noTelp")String noTelp,
+                                  @Field("image")String image);
 
-    @PUT("user/{id}")
+    @POST("user/{id}")
     @FormUrlEncoded
     Call<UserResponse> updateUser(@Path("id")String id,
                                   @Field("name")String nama,
-                                  @Field("email")String email);
+                                  @Field("email")String email,
+                                  @Field("alamat")String alamat,
+                                  @Field("noTelp")String noTelp,
+                                  @Field("image")String image);
 
     //API Motor
 
@@ -51,7 +57,7 @@ public interface ApiInterface {
     Call<MotorResponseObject> createMotor(@Field("nama_motor")String nama_motor,
                                           @Field("harga")String harga);
 
-    @PUT("motor/{id}")
+    @POST("motor/{id}")
     @FormUrlEncoded
     Call<MotorResponseObject> updateMotor(@Path("id")String id,
                                           @Field("nama_motor")String nama_motor,
@@ -67,15 +73,15 @@ public interface ApiInterface {
 
     @GET("transaksi/{id_penyewa}")
     Call<TransaksiResponse> getTransaksiByIdPenyewa(@Path("id_penyewa")String id_penyewa,
-                                              @Query("data")String data);
+                                                    @Query("data")String data);
 
     @POST("transaksi")
     @FormUrlEncoded
     Call<TransaksiResponse> createTransaksi(@Field("nama")String nama_penyewa, @Field("id_penyewa")String id,
                                             @Field("alamat")String alamat, @Field("pilihan_motor")String pilihan,
-                                            @Field("tgl_sewa")String tglSewa, @Field("lama_sewa")String LamaSewa);
+                                            @Field("tgl_sewa")String tglSewa, @Field("lama_sewa")String lamaSewa);
 
-    @PUT("transaksi/{id}")
+    @POST("transaksi/{id}")
     @FormUrlEncoded
     Call<TransaksiResponse> updateTransaksi(@Path("id")String id,
                                             @Field("nama_penyewa")String nama_penyewa, @Field("id_penyewa")String id_penyewa,

@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.GsonBuilder;
 import com.uaspbp.rentalmotor.Api.ApiClient;
 import com.uaspbp.rentalmotor.Api.ApiInterface;
+import com.uaspbp.rentalmotor.MainActivity;
 import com.uaspbp.rentalmotor.MainActivityAdmin;
 import com.uaspbp.rentalmotor.R;
 import com.uaspbp.rentalmotor.Response.MotorResponseObject;
@@ -28,16 +29,10 @@ public class CreateSewaUser extends AppCompatActivity {
     TextInputEditText twNamaPenyewa, twIDPenyewa, twAlamatPenyewa, twNamaMotor, twTglSewa, twLamaSewa;
     Button btnCreate, btnCancel;
 
-    private String sNamaMotor, sIdPenyewa;
-    private ProgressDialog progressDialog;
-    private String id;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_sewa);
-
-        id = getIntent().getStringExtra("namaMotorId");
 
         twNamaPenyewa = findViewById(R.id.etNamaPenyewa);
         twAlamatPenyewa = findViewById(R.id.etAlamatPenyewa);
@@ -45,8 +40,6 @@ public class CreateSewaUser extends AppCompatActivity {
         twNamaMotor = findViewById(R.id.etPilihanMotor);
         twTglSewa = findViewById(R.id.etTglSewa);
         twLamaSewa = findViewById(R.id.etLamaSewa);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.show();
 
         btnCancel = findViewById(R.id.btnCancel);
         btnCreate = findViewById(R.id.btnCreate);
@@ -74,7 +67,7 @@ public class CreateSewaUser extends AppCompatActivity {
                     twLamaSewa.setError("Lama Sewa Harus Diisi");
                     twLamaSewa.requestFocus();
                 } else {
-                    createReservasi();
+                    createSewa();
 
                 }
             }
@@ -86,43 +79,22 @@ public class CreateSewaUser extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        loadMotorById(id);
     }
 
-    private void loadMotorById(String id) {
-        ApiInterface apiServiceMotorId = ApiClient.getClient().create(ApiInterface.class);
-        Call<MotorResponseObject> getMotor = apiServiceMotorId.getMotorById(id, "data");
-
-        getMotor.enqueue(new Callback<MotorResponseObject>() {
-            @Override
-            public void onResponse(Call<MotorResponseObject> call, Response<MotorResponseObject> response) {
-                sNamaMotor = response.body().getMotor().getNama_motor();
-                twNamaMotor.setText(sNamaMotor);
-                progressDialog.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<MotorResponseObject> call, Throwable t) {
-                Toast.makeText(com.uaspbp.rentalmotor.Create.CreateSewaUser.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
-            }
-        });
-    }
-
-    private void createReservasi() {
-        ApiInterface apiServiceCreateReservasi = ApiClient.getClient().create(ApiInterface.class);
-        Call<TransaksiResponse> addReservasi = apiServiceCreateReservasi.createTransaksi(twNamaPenyewa.getText().toString(), twIDPenyewa.getText().toString(),
+    private void createSewa() {
+        ApiInterface apiServiceCreateSewa= ApiClient.getClient().create(ApiInterface.class);
+        Call<TransaksiResponse> addSewa = apiServiceCreateSewa.createTransaksi(twNamaPenyewa.getText().toString(), twIDPenyewa.getText().toString(),
                                                                                         twAlamatPenyewa.getText().toString(), twNamaMotor.getText().toString(),
                                                                                         twTglSewa.getText().toString(), twLamaSewa.getText().toString());
 
-        addReservasi.enqueue(new Callback<TransaksiResponse>() {
+        addSewa.enqueue(new Callback<TransaksiResponse>() {
             @Override
             public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
                 Toast.makeText(com.uaspbp.rentalmotor.Create.CreateSewaUser.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                 onBackPressed();
 
-                Log.i("createReservasi", "msg: "+ new GsonBuilder().setPrettyPrinting().create().toJson(response));
-                Intent intent = new Intent(getApplicationContext(), MainActivityAdmin.class);
+                Log.i("create", "msg: "+ new GsonBuilder().setPrettyPrinting().create().toJson(response));
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
 

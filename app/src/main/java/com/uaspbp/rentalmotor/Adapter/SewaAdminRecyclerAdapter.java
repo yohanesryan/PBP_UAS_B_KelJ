@@ -1,5 +1,5 @@
 package com.uaspbp.rentalmotor.Adapter;
-//
+
 //import android.content.Context;
 //import android.os.Bundle;
 //import android.view.LayoutInflater;
@@ -16,10 +16,14 @@ package com.uaspbp.rentalmotor.Adapter;
 //import androidx.recyclerview.widget.RecyclerView;
 //
 //
+//import com.uaspbp.rentalmotor.Dao.TransaksiDao;
+//import com.uaspbp.rentalmotor.Fragment.DetailSewaFragmentAdmin;
+//import com.uaspbp.rentalmotor.R;
+//
 //import java.util.List;
 //import java.util.stream.Collectors;
 //
-//public class SewaAdminRecyclerAdapter extends RecyclerView.Adapter <SewaAdminRecyclerAdapter.RoomViewHolder> implements Filterable {
+//public class SewaAdminRecyclerAdapter extends RecyclerView.Adapter <SewaAdminRecyclerAdapter.MotorViewHolder> implements Filterable {
 //
 //    private List<TransaksiDao> dataList;
 //    private List<TransaksiDao> filteredDataList;
@@ -40,7 +44,7 @@ package com.uaspbp.rentalmotor.Adapter;
 //    }
 //
 //    @Override
-//    public void onBindViewHolder(@NonNull SewaAdminRecyclerAdapter.RoomViewHolder holder, int position) {
+//    public void onBindViewHolder(@NonNull SewaAdminRecyclerAdapter.MotoriewHolder holder, int position) {
 //        final TransaksiDao transaksi = filteredDataList.get(position);
 //        holder.twNamaPenyewa.setText(transaksi.getNama());
 //        holder.twIdPenyewa.setText(transaksi.getId_penyewa());

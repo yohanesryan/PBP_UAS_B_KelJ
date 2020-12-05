@@ -17,7 +17,9 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.uaspbp.rentalmotor.Adapter.MotorRecyclerAdapter;
 import com.uaspbp.rentalmotor.Api.ApiClient;
 import com.uaspbp.rentalmotor.Api.ApiInterface;
+import com.uaspbp.rentalmotor.Create.CreateMotor;
 import com.uaspbp.rentalmotor.Dao.MotorDao;
+import com.uaspbp.rentalmotor.Profile.ProfileUser;
 import com.uaspbp.rentalmotor.R;
 import com.uaspbp.rentalmotor.Response.MotorResponse;
 
@@ -30,7 +32,7 @@ import retrofit2.Response;
 
 public class DaftarMotorAdmin extends AppCompatActivity {
 
-    private ImageButton ibBack;
+    private ImageButton ibBack, ibAdd;
     private RecyclerView recyclerView;
     private MotorRecyclerAdapter recyclerAdapter;
     private List<MotorDao> motor = new ArrayList<>();
@@ -51,6 +53,15 @@ public class DaftarMotorAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        ibAdd = findViewById(R.id.ibAdd);
+        ibAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreateMotor.class);
+                startActivity(intent);
             }
         });
 

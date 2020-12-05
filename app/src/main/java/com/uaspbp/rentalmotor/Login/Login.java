@@ -18,6 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.uaspbp.rentalmotor.MainActivity;
+import com.uaspbp.rentalmotor.MainActivityAdmin;
 import com.uaspbp.rentalmotor.R;
 import com.uaspbp.rentalmotor.Register.Register;
 
@@ -85,7 +86,7 @@ public class Login extends AppCompatActivity {
 
         if(txtEmail.getText().toString().equalsIgnoreCase("admin123@gmail.com") && txtPassword.getText().toString().equalsIgnoreCase("admin123")) {
             Toast.makeText(Login.this, "Welcome Admin", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(Login.this, MainActivity.class));
+            startActivity(new Intent(Login.this, MainActivityAdmin.class));
         }
             else{
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -102,13 +103,11 @@ public class Login extends AppCompatActivity {
                             user.sendEmailVerification();
                             Toast.makeText(Login.this, "Please check your email!", Toast.LENGTH_LONG).show();
                         }
-
                     } else {
                         Toast.makeText(Login.this, "Failed to login!", Toast.LENGTH_LONG).show();
                     }
                 }
             });
             }
-
     }
 }
