@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.uaspbp.rentalmotor">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,15 +14,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RentalMotor">
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".Register.Register"></activity>
-        <activity android:name=".Login.Login">
+        <activity android:name=".Create.CreateMotor"></activity>
+        <activity android:name=".Edit.EditMotor"></activity>
+        <activity android:name=".Create.CreateSewa"></activity>
+        <activity android:name=".Daftar.DaftarMotorAdmin"></activity>
+        <activity android:name=".Daftar.DaftarMotorUser"></activity>
+        <!--        <activity android:name=".Daftar.DaftarSewaAdmin"></activity>-->
+        <activity android:name=".Daftar.DaftarSewaUser"></activity>
+        <activity android:name=".Profile.ProfileAdmin"></activity>
+        <activity android:name=".Profile.ProfileUser"></activity>
+        <activity android:name=".Edit.EditUser"></activity>
+        <activity android:name=".Create.CreateSewaUser"></activity>
+        <activity android:name=".Login.Login"></activity>
+        <activity android:name=".SplashScreen.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity">
         </activity>
     </application>
 

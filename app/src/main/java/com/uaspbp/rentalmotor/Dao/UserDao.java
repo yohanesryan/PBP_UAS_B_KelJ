@@ -3,11 +3,9 @@ package com.uaspbp.rentalmotor.Dao;
 import com.google.gson.annotations.SerializedName;
 
 public class UserDao {
+
     @SerializedName("id")
     private String id;
-
-    @SerializedName("name")
-    private String name;
 
     @SerializedName("email")
     private String email;
@@ -15,11 +13,26 @@ public class UserDao {
     @SerializedName("password")
     private String password;
 
-    public UserDao(String id, String nama, String email, String password) {
+    @SerializedName("name")
+    private String nama;
+
+    @SerializedName("alamat")
+    private String alamat;
+
+    @SerializedName("noTelp")
+    private String noTelp;
+
+    @SerializedName("image")
+    private String image;
+
+    public UserDao(String id, String email, String password, String nama, String alamat, String noTelp, String image) {
         this.id = id;
-        this.name = nama;
         this.email = email;
         this.password = password;
+        this.nama = nama;
+        this.alamat = alamat;
+        this.noTelp = noTelp;
+        this.image = image;
     }
 
     public String getId() {
@@ -30,17 +43,13 @@ public class UserDao {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String nama) {
-        this.name = nama;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
-    public String getEmail() {return email;}
-
-    public void setEmail(String email) {this.email = email;}
 
     public String getPassword() {
         return password;
@@ -50,7 +59,35 @@ public class UserDao {
         this.password = password;
     }
 
-    public UserDao get(int i) {
-        return get(i);
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public String getNoTelp() {
+        return noTelp;
+    }
+
+    public void setNoTelp(String noTelp) {
+        this.noTelp = noTelp;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

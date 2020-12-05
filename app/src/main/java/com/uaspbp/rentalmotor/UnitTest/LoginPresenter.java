@@ -23,7 +23,7 @@ public class LoginPresenter {
                     LoginCallback() {
                         @Override
                         public void onSuccess(boolean value, UserDao user) {
-                            if (user.getName().equalsIgnoreCase("admin")) {
+                            if (user.getNama().equalsIgnoreCase("admin")) {
                                 view.startMainActivity();
                             } else {
                                 view.startUserProfileActivity(user);

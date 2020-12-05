@@ -21,7 +21,7 @@ public class LoginService {
             public void onResponse(Call<UserResponse> call,
                                    Response<UserResponse> response) {
                 if(response.body().getMessage().equalsIgnoreCase("berhasil login")){
-                    callback.onSuccess(true, response.body().getUser().get(0));
+                    callback.onSuccess(true, response.body().getUser());
                 }
                 else{
                     callback.onError();

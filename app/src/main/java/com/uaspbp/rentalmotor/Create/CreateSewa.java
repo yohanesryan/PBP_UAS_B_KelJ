@@ -1,4 +1,4 @@
-package com.uaspbp.rentalmotor.Daftar;
+package com.uaspbp.rentalmotor.Create;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.uaspbp.rentalmotor.Adapter.MotorRecyclerAdapterUser;
+import com.uaspbp.rentalmotor.Adapter.SewaRecyclerAdapterUser;
 import com.uaspbp.rentalmotor.Api.ApiClient;
 import com.uaspbp.rentalmotor.Api.ApiInterface;
 import com.uaspbp.rentalmotor.Dao.MotorDao;
 import com.uaspbp.rentalmotor.R;
 import com.uaspbp.rentalmotor.Response.MotorResponse;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +28,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DaftarMotorUser extends AppCompatActivity {
+public class CreateSewa extends AppCompatActivity {
 
     private ImageButton ibBack;
     private RecyclerView recyclerView;
-    private MotorRecyclerAdapterUser recyclerAdapter;
+    private SewaRecyclerAdapterUser recyclerAdapter;
     private List<MotorDao> motor = new ArrayList<>();
     private SearchView searchView;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -42,7 +41,7 @@ public class DaftarMotorUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.daftar_motor_user);
+        setContentView(R.layout.daftar_motor_sewa);
 
         shimmerFrameLayout = findViewById(R.id.shimmerLayout);
         shimmerFrameLayout.startShimmer();
@@ -93,7 +92,7 @@ public class DaftarMotorUser extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MotorResponse> call, Throwable t) {
-                Toast.makeText(DaftarMotorUser.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+                Toast.makeText(CreateSewa.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -101,7 +100,7 @@ public class DaftarMotorUser extends AppCompatActivity {
 
     private void generateDataList(List<MotorDao> motorList) {
         recyclerView = findViewById(R.id.userRecyclerView);
-        recyclerAdapter = new MotorRecyclerAdapterUser(motorList, this);
+        recyclerAdapter = new SewaRecyclerAdapterUser(motorList, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(layoutManager);

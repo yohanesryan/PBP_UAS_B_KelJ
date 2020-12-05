@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Daftar.DaftarMotorUser">
+    tools:context=".Daftar.DaftarMotorAdmin">
 
     <LinearLayout
         android:id="@+id/upper"
@@ -37,7 +37,7 @@
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="Show List Motor User"/>
+                android:text="Show List Motor"/>
         </LinearLayout>
 
         <LinearLayout

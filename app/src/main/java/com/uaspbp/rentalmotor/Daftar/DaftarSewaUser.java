@@ -14,13 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.uaspbp.rentalmotor.Adapter.MotorRecyclerAdapterUser;
+import com.uaspbp.rentalmotor.Adapter.SewaUserRecyclerAdapter;
 import com.uaspbp.rentalmotor.Api.ApiClient;
 import com.uaspbp.rentalmotor.Api.ApiInterface;
-import com.uaspbp.rentalmotor.Dao.MotorDao;
+import com.uaspbp.rentalmotor.Dao.TransaksiDao;
 import com.uaspbp.rentalmotor.R;
-import com.uaspbp.rentalmotor.Response.MotorResponse;
-
+import com.uaspbp.rentalmotor.Response.TransaksiResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,20 +28,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DaftarMotorUser extends AppCompatActivity {
+public class DaftarSewaUser extends AppCompatActivity {
 
     private ImageButton ibBack;
     private RecyclerView recyclerView;
-    private MotorRecyclerAdapterUser recyclerAdapter;
-    private List<MotorDao> motor = new ArrayList<>();
+    private SewaUserRecyclerAdapter recyclerAdapter;
+    private List<TransaksiDao> transaksi = new ArrayList<>();
     private SearchView searchView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ShimmerFrameLayout shimmerFrameLayout;
+    private String sIdPenyewa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.daftar_motor_user);
+        setContentView(R.layout.daftar_sewa_user);
 
         shimmerFrameLayout = findViewById(R.id.shimmerLayout);
         shimmerFrameLayout.startShimmer();
@@ -59,11 +59,10 @@ public class DaftarMotorUser extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setRefreshing(true);
 
-        loadMotor();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadMotor();
+                loadTransaksiById(sIdPenyewa);
             }
         });
 
@@ -80,28 +79,28 @@ public class DaftarMotorUser extends AppCompatActivity {
         }
     }
 
-    private void loadMotor() {
-        ApiInterface apiGetMotor = ApiClient.getClient().create(ApiInterface.class);
-        Call<MotorResponse> callGetMotor = apiGetMotor.getAllMotor("data");
+    private void loadTransaksiById(String id_penyewa) {
+        ApiInterface apiGetTransaksi = ApiClient.getClient().create(ApiInterface.class);
+        Call<TransaksiResponse> callGetTransaksi = apiGetTransaksi.getTransaksiByIdPenyewa(id_penyewa,"data");
 
-        callGetMotor.enqueue(new Callback<MotorResponse>() {
+        callGetTransaksi.enqueue(new Callback<TransaksiResponse>() {
             @Override
-            public void onResponse(Call<MotorResponse> call, Response<MotorResponse> response) {
-                generateDataList(response.body().getMotor());
+            public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
+                generateDataList((List<TransaksiDao>) response.body().getTransaksis());
                 swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
-            public void onFailure(Call<MotorResponse> call, Throwable t) {
-                Toast.makeText(DaftarMotorUser.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<TransaksiResponse> call, Throwable t) {
+                Toast.makeText(DaftarSewaUser.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
-    private void generateDataList(List<MotorDao> motorList) {
-        recyclerView = findViewById(R.id.userRecyclerView);
-        recyclerAdapter = new MotorRecyclerAdapterUser(motorList, this);
+    private void generateDataList(List<TransaksiDao> transaksiList) {
+        recyclerView = findViewById(R.id.TransaksiRecyclerView);
+        recyclerAdapter = new SewaUserRecyclerAdapter(transaksiList, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(layoutManager);

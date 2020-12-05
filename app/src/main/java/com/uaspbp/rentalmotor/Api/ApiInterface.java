@@ -2,6 +2,7 @@ package com.uaspbp.rentalmotor.Api;
 
 import com.uaspbp.rentalmotor.Response.MotorResponse;
 import com.uaspbp.rentalmotor.Response.MotorResponseObject;
+import com.uaspbp.rentalmotor.Response.TransaksiResponse;
 import com.uaspbp.rentalmotor.Response.UserResponse;
 
 import retrofit2.Call;
@@ -26,13 +27,14 @@ public interface ApiInterface {
 
     @POST("registrasi")
     @FormUrlEncoded
-    Call<UserResponse> createUser(@Field("name")String nama, @Field("age")String age,
-                                  @Field("email")String email, @Field("password")String password);
+    Call<UserResponse> createUser(@Field("name")String nama,
+                                  @Field("email")String email,
+                                  @Field("password")String password);
 
     @PUT("user/{id}")
     @FormUrlEncoded
     Call<UserResponse> updateUser(@Path("id")String id,
-                                  @Field("name")String nama, @Field("age")String age,
+                                  @Field("name")String nama,
                                   @Field("email")String email);
 
     //API Motor
@@ -46,42 +48,42 @@ public interface ApiInterface {
 
     @POST("motor")
     @FormUrlEncoded
-    Call<MotorResponseObject> createMotor(@Field("nama_motor")String nama_motor, @Field("merk")String merk,
-                                    @Field("harga")String harga, @Field("imageURL")String image);
+    Call<MotorResponseObject> createMotor(@Field("nama_motor")String nama_motor,
+                                          @Field("harga")String harga);
 
     @PUT("motor/{id}")
     @FormUrlEncoded
     Call<MotorResponseObject> updateMotor(@Path("id")String id,
-                                    @Field("nama_motor")String nama_motor, @Field("merk")String merk,
-                                    @Field("harga")String harga, @Field("imageURL")String image);
+                                          @Field("nama_motor")String nama_motor,
+                                          @Field("harga")String harga);
 
     @DELETE("motor/{id}")
     Call<MotorResponseObject> deleteMotor(@Path("id")String id);
 
     //API Transaksi
 
-//    @GET("transaksi")
-//    Call<TransaksiResponse> getAllTransaksi(@Query("data")String data);
-//
-//    @GET("transaksi/{id_pemesan}")
-//    Call<TransaksiResponse> gettTransaksiByIdPemesan(@Path("id_pemesan")String id_pemesan,
-//                                              @Query("data")String data);
-//
-//    @POST("transaksi")
-//    @FormUrlEncoded
-//    Call<TransaksiResponse> createTransaksi(@Field("nama")String nama_pemesan, @Field("id_pemesan")String id,
-//                                            @Field("alamat")String alamat, @Field("pilihan_motor")String pilihan,
-//                                            @Field("tgl_check_in")String tglCheckIn, @Field("tgl_check_out")String tglCheckOut);
-//
-//    @PUT("transaksi/{id}")
-//    @FormUrlEncoded
-//    Call<TransaksiResponse> updateTransaksi(@Path("id")String id,
-//                                            @Field("nama_pemesan")String nama_pemesan, @Field("id_pemesan")String id_pemesan,
-//                                            @Field("alamat")String alamat, @Field("pilihan_motor")String pilihan,
-//                                            @Field("tgl_check_in")String tglCheckIn, @Field("tgl_check_out")String tglCheckOut);
-//
-//    @DELETE("transaksi/{id}")
-//    Call<TransaksiResponse> deleteTransaksi(@Path("id")String id);
+    @GET("transaksi")
+    Call<TransaksiResponse> getAllTransaksi(@Query("data")String data);
+
+    @GET("transaksi/{id_penyewa}")
+    Call<TransaksiResponse> getTransaksiByIdPenyewa(@Path("id_penyewa")String id_penyewa,
+                                              @Query("data")String data);
+
+    @POST("transaksi")
+    @FormUrlEncoded
+    Call<TransaksiResponse> createTransaksi(@Field("nama")String nama_penyewa, @Field("id_penyewa")String id,
+                                            @Field("alamat")String alamat, @Field("pilihan_motor")String pilihan,
+                                            @Field("tgl_sewa")String tglSewa, @Field("lama_sewa")String LamaSewa);
+
+    @PUT("transaksi/{id}")
+    @FormUrlEncoded
+    Call<TransaksiResponse> updateTransaksi(@Path("id")String id,
+                                            @Field("nama_penyewa")String nama_penyewa, @Field("id_penyewa")String id_penyewa,
+                                            @Field("alamat")String alamat, @Field("pilihan_motor")String pilihan,
+                                            @Field("tgl_sewa")String tglSewa, @Field("lama_sewa")String lamaSewa);
+
+    @DELETE("transaksi/{id}")
+    Call<TransaksiResponse> deleteTransaksi(@Path("id")String id);
 
     @POST("login")
     @FormUrlEncoded
