@@ -57,13 +57,13 @@ public class MainActivityAdmin extends AppCompatActivity {
             }
         });
 
-//        btnSignOut.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), SignOutUser.class);
-//                startActivity(intent);
-//            }
-//        });
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignOut.class);
+                startActivity(intent);
+            }
+        });
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
