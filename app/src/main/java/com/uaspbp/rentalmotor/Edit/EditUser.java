@@ -1,69 +1,81 @@
 package com.uaspbp.rentalmotor.Edit;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.gson.GsonBuilder;
-import com.uaspbp.rentalmotor.Api.ApiClient;
-import com.uaspbp.rentalmotor.Api.ApiInterface;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.uaspbp.rentalmotor.R;
-import com.uaspbp.rentalmotor.Response.UserResponse;
 
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class EditUser extends AppCompatActivity {
 
-    private EditText editNama, editEmail;
-    private String sIdUser, sNama, sEmail;
-    private MaterialButton btnEdit, btnCancel;
-    private String email,id;
-    private ProgressDialog progressDialog;
-    private SharedPreferences sharedPreferences;
+    Button btnSumbit, btnCancel;
+    TextInputEditText inputNama, inputAlamat, inputNoTelp, txtEmail, txtPassword;
+    private static String CHANNEL_ID = "Channel 1";
+    private SharedPreferences preferences;
     public static final int mode = Activity.MODE_PRIVATE;
+    private String nama, alamat, noTelp, userID;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_user);
 
-        sharedPreferences = getSharedPreferences("Login", mode);
-        email = sharedPreferences.getString("email", "");
-        id = sharedPreferences.getString("id", "");
-
-        btnEdit = findViewById(R.id.btnUpdate);
+        inputNama = findViewById(R.id.etNama);
+        inputAlamat = findViewById(R.id.etAlamatPenyewa);
+        inputNoTelp = findViewById(R.id.etNoTelp);
+        btnSumbit = findViewById(R.id.btnUpdate);
         btnCancel = findViewById(R.id.btnCancel);
-        editNama = findViewById(R.id.etNama);
-        editEmail = findViewById(R.id.etEmail);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.show();
 
-//        id = getIntent().getStringExtra("id");
-//        Log.i("EDIT USER ID", "msg: " +id);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        userID = firebaseUser.getUid();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("users");
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        // READ FROM DATABASE
+        databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                if(editNama.getText().toString().isEmpty()){
-                    editNama.setError("Nama Harus Diisi");
-                    editNama.requestFocus();
-                }else{
-                    progressDialog.show();
-                    update();
-                }
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                inputNama.setText(dataSnapshot.child("name").getValue().toString());
+                inputAlamat.setText(dataSnapshot.child("alamat").getValue().toString());
+                inputNoTelp.setText(dataSnapshot.child("no_telp").getValue().toString());
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
@@ -73,60 +85,50 @@ public class EditUser extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        loadUserByEmail(email);
-    }
 
-    private void loadUserByEmail(String email) {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<UserResponse> add = apiService.getUserByEmail(email, "data");
-
-        add.enqueue(new Callback<UserResponse>() {
-
+        btnSumbit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                Log.i("EDIT", "msg: " + new GsonBuilder().setPrettyPrinting().create().toJson(response));
-                sNama = response.body().getUser().getNama();
-                sEmail = response.body().getUser().getEmail();
-                sIdUser = response.body().getUser().getId();
+            public void onClick(View view) {
+                nama = inputNama.getText().toString().trim();
+                alamat = inputAlamat.getText().toString().trim();
+                noTelp = inputNoTelp.getText().toString().trim();
 
-                editNama.setText(sNama);
-                editEmail.setText(sEmail);
-                progressDialog.dismiss();
-            }
+                // UPDATE TO DATABASE
+                databaseReference.child(userID).child("nama").setValue(nama);
+                databaseReference.child(userID).child("alamat").setValue(alamat);
+                databaseReference.child(userID).child("no_telp").setValue(noTelp);
 
-            @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-                Toast.makeText(EditUser.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
+                createNotificationChannel();
+                onBackPressed();
             }
         });
-
     }
 
-    private void update() {
-        ApiInterface apiServiceUpdateUser = ApiClient.getClient().create(ApiInterface.class);
-        Call<UserResponse> reqUpdateUser = apiServiceUpdateUser.updateUser(id, editNama.getText().toString(),
-                                                                            editEmail.getText().toString());
-
-        reqUpdateUser.enqueue(new Callback<UserResponse>() {
-            @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                Toast.makeText(EditUser.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("EDIT", new GsonBuilder().setPrettyPrinting().create().toJson(response));
-                progressDialog.dismiss();
-                finish();
-            }
-
-            @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-                Toast.makeText(EditUser.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
-                Log.i("EDIT", t.getMessage());
-                progressDialog.dismiss();
-            }
-        });
-
-        Intent returnIntent = new Intent();
-        setResult(Activity.RESULT_OK, returnIntent);
-        finish();
+    private void savePreferences() {
+        SharedPreferences.Editor editor = preferences.edit();
+        if (!inputNama.getText().toString().isEmpty() && !inputAlamat.getText().toString().isEmpty() &&
+                !inputNoTelp.getText().toString().isEmpty()) {
+            editor.putString("nama", inputNama.getText().toString());
+            editor.putString("alamat", inputAlamat.getText().toString());
+            editor.putString("noTelp", inputNoTelp.getText().toString());
+            editor.apply();
+            Toast.makeText(this, "Profile saved", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "Fill correctly", Toast.LENGTH_SHORT).show();
+        }
     }
+
+    private void createNotificationChannel () {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name ="Channel 1";
+            String description ="This is Channel 1";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 }
+

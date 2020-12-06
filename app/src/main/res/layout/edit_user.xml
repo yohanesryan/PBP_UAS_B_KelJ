@@ -67,7 +67,7 @@
                     android:layout_marginVertical="10dp"
                     android:hint="No Telp">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etAge"
+                        android:id="@+id/etNoTelp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text" />
@@ -99,7 +99,6 @@
                         android:id="@+id/etAlamatPenyewa"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:enabled="false"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
