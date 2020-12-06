@@ -19,7 +19,6 @@ import com.uaspbp.rentalmotor.Api.ApiClient;
 import com.uaspbp.rentalmotor.Api.ApiInterface;
 import com.uaspbp.rentalmotor.Daftar.DaftarMotorAdmin;
 import com.uaspbp.rentalmotor.Daftar.DaftarSewaUser;
-import com.uaspbp.rentalmotor.Profile.ProfileUser;
 import com.uaspbp.rentalmotor.Response.UserResponse;
 
 import retrofit2.Call;
@@ -36,7 +35,7 @@ public class MainActivityAdmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         email = getIntent().getStringExtra("email");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_admin);
 
         sharedPreferences = getSharedPreferences("Login", mode);
 
@@ -45,7 +44,6 @@ public class MainActivityAdmin extends AppCompatActivity {
         Button informasi = findViewById(R.id.btn_info_motor);
         Button sewa = findViewById(R.id.btn_sewa);
         Button map = findViewById(R.id.btn_map);
-        Button profile = findViewById(R.id.btn_profile);
         Button credit = findViewById(R.id.btn_about);
         Button signout = findViewById(R.id.btn_signout);
 
@@ -61,14 +59,6 @@ public class MainActivityAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SignOut.class);
-                startActivity(intent);
-            }
-        });
-
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ProfileUser.class);
                 startActivity(intent);
             }
         });

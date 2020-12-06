@@ -21,13 +21,13 @@
         <activity android:name=".Edit.EditMotor"></activity>
         <activity android:name=".Daftar.DaftarMotorAdmin"></activity>
         <activity android:name=".Daftar.DaftarMotorUser"></activity>
-        <!--        <activity android:name=".Daftar.DaftarSewaAdmin"></activity>-->
         <activity android:name=".Daftar.DaftarSewaUser"></activity>
         <activity android:name=".Profile.ProfileAdmin"></activity>
         <activity android:name=".Profile.ProfileUser"></activity>
         <activity android:name=".Edit.EditUser"></activity>
         <activity android:name=".Create.CreateSewaUser"></activity>
         <activity android:name=".Login.Login"></activity>
+        <activity android:name=".SignOut"></activity>
         <activity android:name=".LokasiActivity" />
         <activity android:name=".ShowCredit" />
         <activity android:name=".SplashScreen.SplashScreen">

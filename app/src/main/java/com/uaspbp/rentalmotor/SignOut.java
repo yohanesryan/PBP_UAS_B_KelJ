@@ -7,9 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,8 +25,6 @@ public class SignOut extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setContentView(R.layout.activity_main_admin);
 
         btnSignOut = findViewById(R.id.btn_signout);
 
@@ -66,7 +61,7 @@ public class SignOut extends AppCompatActivity {
                 .setContentTitle("SIGN OUT")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, Login.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(contentIntent);
 
