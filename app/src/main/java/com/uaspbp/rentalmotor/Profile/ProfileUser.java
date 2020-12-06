@@ -122,12 +122,12 @@ public class ProfileUser extends AppCompatActivity {
 //            imageView.setImageURI(Uri.parse(photoPath));
 //        }
 
-        btnPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkPermission();
-            }
-        });
+//        btnPhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                checkPermission();
+//            }
+//        });
 
         btn_ganti_profil.setOnClickListener(new View.OnClickListener() {
             @Override

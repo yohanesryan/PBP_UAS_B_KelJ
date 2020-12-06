@@ -33,7 +33,7 @@ import com.uaspbp.rentalmotor.R;
 public class EditUser extends AppCompatActivity {
 
     Button btnSumbit, btnCancel;
-    TextInputEditText inputNama, inputAlamat, inputNoTelp, txtEmail, txtPassword;
+    TextInputEditText inputNama, inputAlamat, inputNoTelp;
     private static String CHANNEL_ID = "Channel 1";
     private SharedPreferences preferences;
     public static final int mode = Activity.MODE_PRIVATE;
@@ -94,7 +94,7 @@ public class EditUser extends AppCompatActivity {
                 noTelp = inputNoTelp.getText().toString().trim();
 
                 // UPDATE TO DATABASE
-                databaseReference.child(userID).child("nama").setValue(nama);
+                databaseReference.child(userID).child("name").setValue(nama);
                 databaseReference.child(userID).child("alamat").setValue(alamat);
                 databaseReference.child(userID).child("no_telp").setValue(noTelp);
 
