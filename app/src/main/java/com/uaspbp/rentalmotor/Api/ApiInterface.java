@@ -63,7 +63,7 @@ public interface ApiInterface {
                                           @Field("nama_motor")String nama_motor,
                                           @Field("harga")String harga);
 
-    @DELETE("motor/{id}")
+    @POST("motor/{id}")
     Call<MotorResponseObject> deleteMotor(@Path("id")String id);
 
     //API Transaksi
@@ -88,7 +88,7 @@ public interface ApiInterface {
                                             @Field("alamat")String alamat, @Field("pilihan_motor")String pilihan,
                                             @Field("tgl_sewa")String tglSewa, @Field("lama_sewa")String lamaSewa);
 
-    @DELETE("transaksi/{id}")
+    @POST("transaksi/{id}")
     Call<TransaksiResponse> deleteTransaksi(@Path("id")String id);
 
     @POST("login")
