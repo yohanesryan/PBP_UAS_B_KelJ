@@ -72,7 +72,7 @@ public class CreateMotor extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MotorResponseObject> call, Throwable t) {
-                Toast.makeText(CreateMotor.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                     Toast.makeText(CreateMotor.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
                 Log.i("response", "msg: " +t.getMessage());
 

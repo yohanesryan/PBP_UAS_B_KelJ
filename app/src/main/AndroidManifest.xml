@@ -27,7 +27,6 @@
         <activity android:name=".Edit.EditUser"></activity>
         <activity android:name=".Create.CreateSewaUser"></activity>
         <activity android:name=".Login.Login"></activity>
-        <activity android:name=".SignOut"></activity>
         <activity android:name=".LokasiActivity" />
         <activity android:name=".ShowCredit" />
         <activity android:name=".SplashScreen.SplashScreen">

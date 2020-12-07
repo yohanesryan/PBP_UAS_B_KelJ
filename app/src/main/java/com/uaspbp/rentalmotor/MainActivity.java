@@ -14,11 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.GsonBuilder;
 import com.uaspbp.rentalmotor.Api.ApiClient;
 import com.uaspbp.rentalmotor.Api.ApiInterface;
 import com.uaspbp.rentalmotor.Daftar.DaftarMotorUser;
 import com.uaspbp.rentalmotor.Daftar.DaftarSewaUser;
+import com.uaspbp.rentalmotor.Login.Login;
 import com.uaspbp.rentalmotor.Profile.ProfileUser;
 import com.uaspbp.rentalmotor.Response.UserResponse;
 
@@ -61,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SignOut.class);
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getApplicationContext(), "Logout Successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });

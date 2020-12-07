@@ -85,6 +85,8 @@ public class DaftarSewaUser extends AppCompatActivity {
         }
     }
 
+    private void loadTransaksi
+
     private void loadTransaksi() {
         ApiInterface apiGetTransaksi = ApiClient.getClient().create(ApiInterface.class);
         Call<TransaksiResponse> callGetTransaksi = apiGetTransaksi.getAllTransaksi("data");

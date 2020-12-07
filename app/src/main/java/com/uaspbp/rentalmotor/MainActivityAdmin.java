@@ -14,11 +14,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.GsonBuilder;
 import com.uaspbp.rentalmotor.Api.ApiClient;
 import com.uaspbp.rentalmotor.Api.ApiInterface;
 import com.uaspbp.rentalmotor.Daftar.DaftarMotorAdmin;
 import com.uaspbp.rentalmotor.Daftar.DaftarSewaUser;
+import com.uaspbp.rentalmotor.Login.Login;
 import com.uaspbp.rentalmotor.Response.UserResponse;
 
 import retrofit2.Call;
@@ -52,14 +54,18 @@ public class MainActivityAdmin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ShowCredit.class);
                 startActivity(intent);
+                finish();
             }
         });
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SignOut.class);
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getApplicationContext(), "Logout Successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -68,6 +74,7 @@ public class MainActivityAdmin extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DaftarMotorAdmin.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -76,6 +83,7 @@ public class MainActivityAdmin extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DaftarSewaUser.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -84,6 +92,7 @@ public class MainActivityAdmin extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LokasiActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
